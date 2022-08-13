@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+__meta__ = {
+"_edit_horizontal_guides_": [ 360.0, 0.0 ],
+"_edit_vertical_guides_": [ 640.0, 0.0 ]
+}
