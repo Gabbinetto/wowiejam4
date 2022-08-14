@@ -17,6 +17,7 @@ onready var detector_area : = $Detector
 onready var ai_indicator : = $AnimatedSprite/Indicator
 onready var animated_sprite : = $AnimatedSprite
 
+
 func _physics_process(delta: float) -> void:
 
 	detector()
@@ -35,7 +36,7 @@ func _physics_process(delta: float) -> void:
 	# Vertical movement
 	gravity()
 	if is_on_floor():
-		if Input.is_action_just_pressed('jump') or (dir.y < -0.15 and state == STATES.COME_BACK):
+		if Input.is_action_just_pressed('jump') or (dir.y < -0.2 and state == STATES.COME_BACK):
 			jump(jump_force)
 	
 	# A.I. indicator
@@ -50,7 +51,8 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.animation = 'Idle'
 	else:
 		animated_sprite.animation = 'Run'
-	
+
+
 	move_and_slide(velocity, Vector2.UP)
 
 func detector():

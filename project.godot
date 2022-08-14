@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/CopingArea2D.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://assets/scripts/Item.gd"
+}, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://assets/scripts/Level.gd"
+}, {
 "base": "Actor",
 "class": "Player",
 "language": "GDScript",
@@ -32,6 +42,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Actor": "",
 "CopingArea2D": "",
+"Item": "",
+"Level": "",
 "Player": "",
 "PlayerBody": ""
 }
@@ -39,7 +51,8 @@ _global_script_class_icons={
 [application]
 
 config/name="WowieJam4"
-run/main_scene="res://assets/scenes/levels/testworld.tscn"
+run/main_scene="res://assets/scenes/TitleScreen.tscn"
+boot_splash/bg_color=Color( 0.835294, 0.835294, 0.835294, 1 )
 config/icon="res://icon.png"
 
 [autoload]
@@ -105,6 +118,11 @@ jump={
 change_ai={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+interact={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

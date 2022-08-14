@@ -9,7 +9,7 @@ var speed_multiplier : = 1.0
 
 func jump(_jump_force : float):
 	velocity.y = -_jump_force
-	print(velocity)
+
 
 func jump_cut(_jump_cut : float):
 	if Input.is_action_just_released('jump') and velocity.y < 0:
@@ -17,8 +17,7 @@ func jump_cut(_jump_cut : float):
 
 func gravity(g = Globals.gravity):
 	if is_on_floor():
-#		velocity.y = g
-		pass
+		velocity.y = g
 	else:
 		velocity.y += g
 	velocity.y = clamp(velocity.y, -INF, Globals.max_fall_speed)
