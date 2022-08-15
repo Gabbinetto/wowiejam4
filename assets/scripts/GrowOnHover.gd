@@ -35,5 +35,3 @@ func _on_mouse_exited() -> void:
 		tween.tween_property(node, property, base_scale, grow_time).set_trans(transition_type).set_ease(ease_type)
 	else:
 		tween.tween_property(node, property, base_scale, grow_time).set_trans(transition_type)
-
-

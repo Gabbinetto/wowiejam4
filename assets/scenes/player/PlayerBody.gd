@@ -5,7 +5,8 @@ signal head_found
 
 enum STATES {
 	AI,
-	COME_BACK
+	COME_BACK,
+	OFF
 }
 var state = STATES.AI
 
@@ -26,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed('change_ai'):
 		state = STATES.AI if state == STATES.COME_BACK else STATES.COME_BACK
 		if state == STATES.AI:
-			dir.x = 1
+			dir.x = 1 if dir.x > 0 else -1
 	if state == STATES.COME_BACK:
 		dir = (player_head.global_position - global_position).normalized()
 	if is_on_wall():
@@ -52,8 +53,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		animated_sprite.animation = 'Run'
 
-
-	move_and_slide(velocity, Vector2.UP)
+	velocity.x += conveyor_modifier
+	if state == STATES.OFF:
+		velocity.x *= 0
+	move_and_slide_with_snap(velocity, snap, Vector2.UP)
 
 func detector():
 	var bodies = detector_area.get_overlapping_bodies()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/scenes/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/PixelEmulator-xq08.ttf" type="DynamicFontData" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/scenes/LevelButton.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=2]
-size = 24
+size = 20
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
@@ -110,6 +110,22 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 )
 }
 
+[sub_resource type="Animation" id=8]
+resource_name = "Start"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Menus/Transition:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -400, 0 ), Vector2( -400, -320 ) ]
+}
+
 [sub_resource type="Animation" id=7]
 resource_name = "ToLevel"
 length = 0.5
@@ -124,6 +140,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( -2, -2 ),
 "update": 0,
 "values": [ Vector2( -400, 0 ), Vector2( -400, -320 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Menus/Transition:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -400, 320 ) ]
 }
 
 [node name="TitleScreen" type="CanvasLayer"]
@@ -189,6 +217,31 @@ transition_type = 10
 ease_type = 1
 grow_time = 0.2
 
+[node name="EraseButtonPivot" type="Node2D" parent="Menus/MainMenu"]
+visible = false
+position = Vector2( 96, 296 )
+
+[node name="EraseButton" type="Button" parent="Menus/MainMenu/EraseButtonPivot"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -41.0
+margin_top = -17.5
+margin_right = 41.0
+margin_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 2 )
+text = "ERASE DATA"
+flat = true
+script = ExtResource( 4 )
+node_to_scale = NodePath("..")
+scale_modifier = Vector2( 1.2, 1.2 )
+transition_type = 10
+ease_type = 1
+grow_time = 0.2
+
 [node name="TitlePivot" type="Node2D" parent="Menus/MainMenu"]
 position = Vector2( 200, 83 )
 rotation = 0.0872665
@@ -223,12 +276,37 @@ z_index = -10
 texture = ExtResource( 3 )
 centered = false
 
+[node name="BackButton" type="Node2D" parent="Menus/Levels"]
+position = Vector2( 80, 24 )
+
+[node name="BackButton" type="Button" parent="Menus/Levels/BackButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -41.0
+margin_top = -17.5
+margin_right = 41.0
+margin_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+custom_fonts/font = SubResource( 2 )
+text = "Go Back"
+flat = true
+script = ExtResource( 4 )
+node_to_scale = NodePath("..")
+scale_modifier = Vector2( 1.2, 1.2 )
+transition_type = 10
+ease_type = 1
+grow_time = 0.2
+
 [node name="GridContainer" type="GridContainer" parent="Menus/Levels"]
-margin_left = 124.0
-margin_top = 136.0
-margin_right = 276.0
-margin_bottom = 184.0
-columns = 10
+margin_left = 98.0
+margin_top = 110.0
+margin_right = 302.0
+margin_bottom = 210.0
+columns = 4
 
 [node name="Level1" parent="Menus/Levels/GridContainer" instance=ExtResource( 6 )]
 margin_right = 48.0
@@ -238,11 +316,46 @@ margin_bottom = 48.0
 margin_left = 52.0
 margin_right = 100.0
 margin_bottom = 48.0
+level = 2
 
 [node name="Level3" parent="Menus/Levels/GridContainer" instance=ExtResource( 6 )]
 margin_left = 104.0
 margin_right = 152.0
 margin_bottom = 48.0
+level = 3
+
+[node name="Level4" parent="Menus/Levels/GridContainer" instance=ExtResource( 6 )]
+margin_left = 156.0
+margin_right = 204.0
+margin_bottom = 48.0
+level = 4
+
+[node name="Level5" parent="Menus/Levels/GridContainer" instance=ExtResource( 6 )]
+margin_top = 52.0
+margin_right = 48.0
+margin_bottom = 100.0
+level = 5
+
+[node name="Level6" parent="Menus/Levels/GridContainer" instance=ExtResource( 6 )]
+margin_left = 52.0
+margin_top = 52.0
+margin_right = 100.0
+margin_bottom = 100.0
+level = 6
+
+[node name="Level7" parent="Menus/Levels/GridContainer" instance=ExtResource( 6 )]
+margin_left = 104.0
+margin_top = 52.0
+margin_right = 152.0
+margin_bottom = 100.0
+level = 7
+
+[node name="Level8" parent="Menus/Levels/GridContainer" instance=ExtResource( 6 )]
+margin_left = 156.0
+margin_top = 52.0
+margin_right = 204.0
+margin_bottom = 100.0
+level = 8
 
 [node name="Transition" type="ColorRect" parent="Menus"]
 margin_left = -400.0
@@ -252,13 +365,26 @@ margin_bottom = 640.0
 color = Color( 0.835294, 0.835294, 0.835294, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Start"
 anims/MainToLevels = SubResource( 5 )
 anims/RESET = SubResource( 6 )
+anims/Start = SubResource( 8 )
 anims/ToLevel = SubResource( 7 )
 
 [connection signal="button_down" from="Menus/MainMenu/PlayButtonPivot/PlayButton" to="." method="_on_play_button_down"]
 [connection signal="mouse_entered" from="Menus/MainMenu/PlayButtonPivot/PlayButton" to="Menus/MainMenu/PlayButtonPivot/PlayButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Menus/MainMenu/PlayButtonPivot/PlayButton" to="Menus/MainMenu/PlayButtonPivot/PlayButton" method="_on_mouse_exited"]
+[connection signal="button_up" from="Menus/MainMenu/EraseButtonPivot/EraseButton" to="." method="_on_erase_button_up"]
+[connection signal="mouse_entered" from="Menus/MainMenu/EraseButtonPivot/EraseButton" to="Menus/MainMenu/EraseButtonPivot/EraseButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menus/MainMenu/EraseButtonPivot/EraseButton" to="Menus/MainMenu/EraseButtonPivot/EraseButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Menus/Levels/BackButton/BackButton" to="." method="_on_back_button_down"]
+[connection signal="mouse_entered" from="Menus/Levels/BackButton/BackButton" to="Menus/Levels/BackButton/BackButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menus/Levels/BackButton/BackButton" to="Menus/Levels/BackButton/BackButton" method="_on_mouse_exited"]
 [connection signal="button_up" from="Menus/Levels/GridContainer/Level1" to="Menus/Levels/GridContainer/Level1" method="_on_button_up"]
 [connection signal="button_up" from="Menus/Levels/GridContainer/Level2" to="Menus/Levels/GridContainer/Level2" method="_on_button_up"]
 [connection signal="button_up" from="Menus/Levels/GridContainer/Level3" to="Menus/Levels/GridContainer/Level3" method="_on_button_up"]
+[connection signal="button_up" from="Menus/Levels/GridContainer/Level4" to="Menus/Levels/GridContainer/Level4" method="_on_button_up"]
+[connection signal="button_up" from="Menus/Levels/GridContainer/Level5" to="Menus/Levels/GridContainer/Level5" method="_on_button_up"]
+[connection signal="button_up" from="Menus/Levels/GridContainer/Level6" to="Menus/Levels/GridContainer/Level6" method="_on_button_up"]
+[connection signal="button_up" from="Menus/Levels/GridContainer/Level7" to="Menus/Levels/GridContainer/Level7" method="_on_button_up"]
+[connection signal="button_up" from="Menus/Levels/GridContainer/Level8" to="Menus/Levels/GridContainer/Level8" method="_on_button_up"]

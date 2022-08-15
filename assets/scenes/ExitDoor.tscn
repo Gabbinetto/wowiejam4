@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/sprites/exit_door.png" type="Texture" id=1]
 [ext_resource path="res://assets/scripts/CopingArea2D.gd" type="Script" id=2]
 [ext_resource path="res://assets/scenes/ExitDoor.gd" type="Script" id=3]
+[ext_resource path="res://assets/sounds/door.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 12, 20 )
@@ -67,6 +68,10 @@ collision_layer = 0
 collision_mask = 15
 script = ExtResource( 2 )
 shape_node_paths = [ NodePath("../CollisionShape2D") ]
+
+[node name="DoorSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -25.0
 
 [connection signal="body_entered" from="CopingArea2D" to="." method="_on_body_entered"]
 [connection signal="body_exited" from="CopingArea2D" to="." method="_on_body_exited"]

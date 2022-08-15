@@ -3,17 +3,16 @@ extends KinematicBody2D
 
 signal triggered(trigger)
 
-export var gravity_affected : = false
 export var active : = true
+const TriggerSound : = preload('res://assets/sounds/trigger_sound.tscn')
 
+var trigger_sound : AudioStreamPlayer
 var velocity = Vector2.ZERO
 
 func _ready() -> void:
-	pass
-
-func _physics_process(delta: float) -> void:
-	if gravity_affected:
-		gravity()
+	trigger_sound = TriggerSound.instance()
+	add_child(trigger_sound)
+	trigger_sound.owner = self
 
 func gravity(g = Globals.gravity):
 	if is_on_floor():
@@ -22,5 +21,11 @@ func gravity(g = Globals.gravity):
 		velocity.y += g
 	velocity.y = clamp(velocity.y, -INF, Globals.max_fall_speed)
 
-func _on_trigger(trigger : bool):
+func _on_triggered(trigger : bool):
 	active = trigger
+
+
+func play_trigger():
+	if active:
+		trigger_sound.pitch_scale = rand_range(-0.85, 1.15)
+		trigger_sound.play()

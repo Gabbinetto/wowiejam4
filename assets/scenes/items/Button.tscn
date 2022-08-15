@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/sprites/items/button.png" type="Texture" id=1]
+[ext_resource path="res://assets/scenes/items/Button.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9, 1.5 )
+
+[node name="Button" type="KinematicBody2D"]
+collision_layer = 16
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 12, 8 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 8, 24, 16 )
+
+[node name="ButtonHead" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 3, -3 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 3, 5, 18, 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 12, -1.5 )
+shape = SubResource( 2 )
+
+[node name="LightIndicator" type="Polygon2D" parent="."]
+color = Color( 0.835294, 0.835294, 0.835294, 1 )
+polygon = PoolVector2Array( 9, 2, 9, 5, 10, 5, 10, 6, 11, 6, 11, 7, 13, 7, 13, 6, 14, 6, 14, 5, 15, 5, 15, 2 )
+
+[node name="LightIndicatorShadow" type="Polygon2D" parent="LightIndicator"]
+modulate = Color( 0.835294, 0.835294, 0.835294, 1 )
+color = Color( 0.835294, 0.835294, 0.835294, 1 )
+polygon = PoolVector2Array( 9, 2, 9, 3, 15, 3, 15, 2 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]

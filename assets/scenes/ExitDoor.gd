@@ -19,6 +19,7 @@ func _process(delta: float) -> void:
 				tween.tween_callback(sprite, 'play', ['default', true])
 				yield(tween, 'finished')
 				
+				$DoorSound.play()
 				emit_signal('exited', next_scene)
 
 func _on_body_entered(body: Node) -> void:
@@ -33,5 +34,5 @@ func _on_body_exited(body: Node) -> void:
 			sprite.play('default', true)
 
 
-func _on_trigger(state : bool):
+func _on_triggered(state : bool):
 	open = state

@@ -1,7 +1,99 @@
-[gd_scene format=2]
+[gd_scene load_steps=8 format=2]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[ext_resource path="res://assets/sprites/button-pressed.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/button-hover.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/button.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/restart_icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/scenes/HUD.gd" type="Script" id=5]
+[ext_resource path="res://assets/PixelEmulator-xq08.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 360.0, 0.0 ],
 "_edit_vertical_guides_": [ 640.0, 0.0 ]
 }
+
+[node name="RestartButton" type="TextureButton" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 1 )
+texture_hover = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="RestartButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+
+[node name="MenuButton" type="TextureButton" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -72.0
+margin_top = 16.0
+margin_right = -48.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 1 )
+texture_hover = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuButton"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 19.0
+margin_bottom = 19.0
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="MenuButton/VBoxContainer"]
+margin_right = 14.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 3, 2 )
+size_flags_vertical = 0
+color = Color( 0.137255, 0.160784, 0.180392, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="MenuButton/VBoxContainer"]
+margin_top = 6.0
+margin_right = 14.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 3, 2 )
+size_flags_vertical = 0
+color = Color( 0.137255, 0.160784, 0.180392, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="MenuButton/VBoxContainer"]
+margin_top = 12.0
+margin_right = 14.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 3, 2 )
+size_flags_vertical = 0
+color = Color( 0.137255, 0.160784, 0.180392, 1 )
+
+[node name="LevelLabel" type="Label" parent="."]
+margin_left = 344.0
+margin_top = 48.0
+margin_right = 384.0
+margin_bottom = 72.0
+custom_fonts/font = SubResource( 1 )
+text = "99"
+align = 1
+valign = 1
+clip_text = true
+
+[connection signal="button_up" from="RestartButton" to="." method="_on_restart_button_up"]
+[connection signal="button_up" from="MenuButton" to="." method="_on_menu_button_up"]
